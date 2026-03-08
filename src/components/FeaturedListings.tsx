@@ -1,40 +1,6 @@
 import { ArrowRight, BedDouble, Bath, Maximize } from "lucide-react";
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
-
-const listings = [
-  {
-    image: property1,
-    badge: "Premium",
-    title: "Mansión Colonial en Vedado",
-    beds: 5,
-    baths: 3,
-    area: 420,
-    tag: "Época Colonial",
-    price: "$1,200,000",
-  },
-  {
-    image: property2,
-    badge: "Premium",
-    title: "Penthouse Art Déco en Miramar",
-    beds: 3,
-    baths: 2,
-    area: 280,
-    tag: "Art Déco",
-    price: "$890,000",
-  },
-  {
-    image: property3,
-    badge: "Destacada",
-    title: "Villa Frente al Mar en Varadero",
-    beds: 4,
-    baths: 3,
-    area: 350,
-    tag: "Contemporánea",
-    price: "$750,000",
-  },
-];
+import { Link } from "react-router-dom";
+import { properties } from "@/data/properties";
 
 const FeaturedListings = () => {
   return (
@@ -51,15 +17,16 @@ const FeaturedListings = () => {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {listings.map((listing) => (
-            <div
-              key={listing.title}
-              className="group bg-negro overflow-hidden hover:shadow-2xl transition-all duration-500"
+          {properties.map((listing) => (
+            <Link
+              to={`/propiedad/${listing.slug}`}
+              key={listing.id}
+              className="group bg-negro overflow-hidden hover:shadow-2xl transition-all duration-500 block"
             >
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
                 <img
-                  src={listing.image}
+                  src={listing.images[0]}
                   alt={listing.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -76,10 +43,10 @@ const FeaturedListings = () => {
 
                 <div className="flex items-center gap-4 text-crema/60 mb-4">
                   <span className="flex items-center gap-1 font-montserrat text-xs">
-                    <BedDouble size={14} /> {listing.beds} Bedrooms
+                    <BedDouble size={14} /> {listing.beds} Hab
                   </span>
                   <span className="flex items-center gap-1 font-montserrat text-xs">
-                    <Bath size={14} /> {listing.baths} Bathrooms
+                    <Bath size={14} /> {listing.baths} Baños
                   </span>
                   <span className="flex items-center gap-1 font-montserrat text-xs">
                     <Maximize size={14} /> {listing.area} m²
@@ -94,13 +61,13 @@ const FeaturedListings = () => {
                     <span className="font-cinzel font-bold text-xl text-crema">
                       {listing.price}
                     </span>
-                    <button className="w-9 h-9 rounded-full bg-ambar flex items-center justify-center hover:bg-ambar/80 transition-colors">
+                    <span className="w-9 h-9 rounded-full bg-ambar flex items-center justify-center group-hover:bg-ambar/80 transition-colors">
                       <ArrowRight size={16} className="text-negro" />
-                    </button>
+                    </span>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
