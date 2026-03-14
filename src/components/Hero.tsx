@@ -39,7 +39,7 @@ const Hero = () => {
       <div className="relative z-10 flex flex-col items-center text-center px-4 pt-24 w-full max-w-4xl mx-auto">
 
         {/* LEMA */}
-        <p className="font-montserrat text-xs font-light tracking-[0.4em] text-[#C8922A]/65 uppercase mb-6 italic">
+        <p className="font-montserrat text-xs font-light tracking-[0.4em] uppercase mb-6 italic" style={{color:"#C8922A", opacity:0.8}}>
           La isla que llevas dentro
         </p>
 
@@ -52,7 +52,7 @@ const Hero = () => {
             CUBANE<span className="relative inline-block">O</span>
           </h1>
         </div>
-        <p className="font-montserrat font-extralight text-sm md:text-base tracking-[0.4em] text-[#C8922A]/80 uppercase mt-3">
+        <p className="font-montserrat font-extralight text-sm md:text-base tracking-[0.4em] uppercase mt-3" style={{color:"#C8922A", opacity:0.85}}>
           Portal Inmobiliario
         </p>
 
@@ -197,5 +197,6 @@ const Hero = () => {
 };
 
 export default Hero;
+
 
 
