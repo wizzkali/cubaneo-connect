@@ -32,7 +32,7 @@ const Footer = () => {
               .ORG
             </span>
             <p className="font-montserrat font-extralight text-[9px] tracking-[0.35em] text-crema/40 uppercase mt-1">
-              Portal Inmobiliario · Diáspora Cubana
+              Portal Inmobiliario · Cuba
             </p>
           </div>
 
@@ -51,8 +51,8 @@ const Footer = () => {
           </div>
 
           {/* Isotipo */}
-          <div className="w-14 h-14 rounded-full border-2 border-ambar/60 flex items-center justify-center hover:border-ambar hover:shadow-[0_0_20px_rgba(218,165,32,0.2)] transition-all duration-300">
-            <span className="font-cinzel font-black text-2xl text-ambar">C</span>
+          <div className="w-16 h-16 overflow-hidden rounded-sm hover:opacity-90 transition-opacity duration-300">
+            <img src="/favicon.png" alt="Cubaneo logo" className="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -65,7 +65,7 @@ const Footer = () => {
             © 2026 Cubaneo.org — Todos los derechos reservados
           </p>
           <p className="font-montserrat font-extralight text-xs text-crema/20 tracking-wider">
-            Construido por el Sindicato Lansky · TUP Methodology
+            cubaneo.org · 2026
           </p>
         </div>
       </div>
@@ -74,3 +74,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
