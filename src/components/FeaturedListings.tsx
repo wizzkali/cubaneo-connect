@@ -14,7 +14,6 @@ const sortOptions: { value: SortKey; label: string }[] = [
 
 const parsePrice = (price: string) => Number(price.replace(/[$,]/g, ""));
 
-// Mini galería con flechas dentro de la card
 const CardGallery = ({ images, title }: { images: string[]; title: string }) => {
   const [current, setCurrent] = useState(0);
   const prev = (e: React.MouseEvent) => { e.preventDefault(); setCurrent((c) => (c - 1 + images.length) % images.length); };
@@ -24,22 +23,17 @@ const CardGallery = ({ images, title }: { images: string[]; title: string }) => 
     <div className="relative h-52 overflow-hidden group/gallery">
       <img src={images[current]} alt={title} className="w-full h-full object-cover transition-all duration-500" />
       <div className="absolute inset-0 bg-gradient-to-t from-negro/50 to-transparent" />
-
-      {/* Flechas — solo si hay más de 1 imagen */}
       {images.length > 1 && (
         <>
-          <button onClick={prev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-negro/60 hover:bg-negro/80 flex items-center justify-center opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-200">
+          <button onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-negro/60 hover:bg-negro/80 flex items-center justify-center opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-200">
             <ChevronLeft size={16} className="text-crema" />
           </button>
-          <button onClick={next}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-negro/60 hover:bg-negro/80 flex items-center justify-center opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-200">
+          <button onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-negro/60 hover:bg-negro/80 flex items-center justify-center opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-200">
             <ChevronRight size={16} className="text-crema" />
           </button>
-          {/* Dots */}
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
             {images.map((_, i) => (
-              <span key={i} className={`w-1 h-1 rounded-full transition-all ${i === current ? "bg-ambar w-3" : "bg-crema/40"}`} />
+              <span key={i} className={`h-1 rounded-full transition-all ${i === current ? "bg-ambar w-3" : "bg-crema/40 w-1"}`} />
             ))}
           </div>
         </>
@@ -54,18 +48,14 @@ const FeaturedListings = () => {
 
   const toggleFav = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    setFavorites((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
+    setFavorites((prev) => { const next = new Set(prev); next.has(id) ? next.delete(id) : next.add(id); return next; });
   };
 
   const sorted = [...properties].sort((a, b) => {
     if (sortBy === "precio-asc") return parsePrice(a.price) - parsePrice(b.price);
     if (sortBy === "precio-desc") return parsePrice(b.price) - parsePrice(a.price);
     if (sortBy === "m2-asc") return b.area - a.area;
-    return 0; // recientes = orden original
+    return 0;
   });
 
   return (
@@ -74,23 +64,24 @@ const FeaturedListings = () => {
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 Q35 15 30 25 Q25 35 30 45 Q35 55 30 60' stroke='%238B4513' fill='none' stroke-width='0.5'/%3E%3C/svg%3E")`, backgroundSize: "60px 60px" }} />
 
       <div className="container mx-auto px-4 relative">
-
         {/* Header + ordenación */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
           <div>
             <p className="font-montserrat text-[10px] font-light tracking-[0.5em] text-tabaco/60 uppercase mb-2">✦ Selección Curada ✦</p>
             <h2 className="font-cinzel font-bold text-3xl md:text-4xl text-negro tracking-wide">Propiedades Destacadas</h2>
-            <p className="font-montserrat text-xs text-negro/40 mt-1">{sorted.length} propiedades encontradas</p>
+            <p className="font-montserrat text-xs text-negro/50 mt-1">{sorted.length} propiedades encontradas</p>
           </div>
 
-          {/* Ordenar por */}
+          {/* Ordenar — texto negro/opaco sobre crema */}
           <div className="flex items-center gap-2 shrink-0">
-            <span className="font-montserrat text-[10px] uppercase tracking-widest text-negro/40">Ordenar:</span>
-            <div className="flex gap-1">
+            <span className="font-montserrat text-[10px] uppercase tracking-widest text-negro/60">Ordenar:</span>
+            <div className="flex gap-1 flex-wrap">
               {sortOptions.map((opt) => (
                 <button key={opt.value} onClick={() => setSortBy(opt.value)}
                   className={`font-montserrat text-[10px] px-3 py-1.5 border transition-all duration-150 ${
-                    sortBy === opt.value ? "bg-negro text-crema border-negro" : "border-negro/20 text-negro/50 hover:border-negro/40"
+                    sortBy === opt.value
+                      ? "bg-negro text-crema border-negro"
+                      : "border-negro/30 text-negro/60 hover:border-negro/60 hover:text-negro"
                   }`}>
                   {opt.label}
                 </button>
@@ -104,54 +95,37 @@ const FeaturedListings = () => {
           {sorted.map((listing) => {
             const precioM2 = Math.round(parsePrice(listing.price) / listing.area).toLocaleString();
             const isFav = favorites.has(listing.id);
-
             return (
               <Link to={`/propiedad/${listing.slug}`} key={listing.id}
                 className="group bg-negro overflow-hidden hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-500 block relative">
-
-                {/* Galería con flechas */}
                 <div className="relative">
                   <CardGallery images={listing.images} title={listing.title} />
-                  {/* Badge */}
                   <span className="absolute top-3 left-3 bg-ambar text-negro font-montserrat font-bold text-[9px] uppercase tracking-wider px-3 py-1 z-10">
                     {listing.badge}
                   </span>
-                  {/* Favorito */}
                   <button onClick={(e) => toggleFav(e, listing.id)}
-                    className={`absolute top-3 right-3 w-8 h-8 flex items-center justify-center z-10 transition-all duration-200 ${
-                      isFav ? "bg-ambar" : "bg-negro/60 hover:bg-negro/80"
-                    }`}>
+                    className={`absolute top-3 right-3 w-8 h-8 flex items-center justify-center z-10 transition-all duration-200 ${isFav ? "bg-ambar" : "bg-negro/60 hover:bg-negro/80"}`}>
                     <Heart size={14} className={isFav ? "text-negro fill-negro" : "text-crema"} />
                   </button>
-                  {/* Location */}
                   <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-negro/65 backdrop-blur-sm px-2 py-1 z-10">
                     <MapPin size={10} className="text-ambar" />
                     <span className="font-montserrat text-[10px] text-crema/90">{listing.location}</span>
                   </div>
                 </div>
-
-                {/* Content */}
                 <div className="p-5">
                   <h3 className="font-cinzel font-bold text-base text-crema mb-3 leading-snug group-hover:text-ambar transition-colors duration-300">
                     {listing.title}
                   </h3>
-
-                  <div className="flex items-center gap-4 text-crema/50 mb-4">
+                  <div className="flex items-center gap-4 text-crema/55 mb-4">
                     <span className="flex items-center gap-1 font-montserrat text-xs"><BedDouble size={13} className="text-ambar/60" /> {listing.beds} Hab</span>
                     <span className="flex items-center gap-1 font-montserrat text-xs"><Bath size={13} className="text-ambar/60" /> {listing.baths} Baños</span>
                     <span className="flex items-center gap-1 font-montserrat text-xs"><Maximize size={13} className="text-ambar/60" /> {listing.area} m²</span>
                   </div>
-
                   <div className="h-px bg-ambar/10 mb-4" />
-
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="font-montserrat text-[9px] uppercase tracking-wider text-ambar border border-ambar/40 px-2 py-1 block mb-1.5">
-                        {listing.tag}
-                      </span>
-                      <span className="font-montserrat text-[9px] text-crema/30">
-                        ${precioM2}/m²
-                      </span>
+                      <span className="font-montserrat text-[9px] uppercase tracking-wider text-ambar border border-ambar/40 px-2 py-1 block mb-1.5">{listing.tag}</span>
+                      <span className="font-montserrat text-[9px] text-crema/35">${precioM2}/m²</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="font-cinzel font-bold text-lg text-crema">{listing.price}</span>
@@ -166,7 +140,6 @@ const FeaturedListings = () => {
           })}
         </div>
 
-        {/* CTA ver más */}
         <div className="text-center mt-12">
           <a href="#" className="inline-block font-montserrat font-semibold text-xs uppercase tracking-widest px-10 py-3 border border-negro/30 text-negro hover:bg-negro hover:text-crema transition-all duration-300">
             Ver todas las propiedades
