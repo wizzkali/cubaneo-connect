@@ -31,7 +31,7 @@ const kpis = [
     label: "Contacto Directo",
     shortDesc: "Sin intermediarios. Sin comisiones ocultas",
     fullTitle: "Contacto Directo con el Vendedor",
-    fullDesc: "Conectamos directamente al comprador de la diáspora con el propietario o su representante en Cuba. Sin intermediarios que encarezcan la operación. Comunicación vía WhatsApp, email o llamada. Transparencia total en cada paso del proceso.",
+    fullDesc: "Conectamos directamente al comprador con el propietario o su representante en Cuba. Sin intermediarios que encarezcan la operación. Comunicación vía WhatsApp, email o llamada. Transparencia total en cada paso del proceso.",
     features: ["Contacto directo por WhatsApp", "Sin comisiones ocultas", "Representante legal disponible"],
   },
 ];
@@ -127,3 +127,4 @@ const KpiStrip = () => {
 };
 
 export default KpiStrip;
+
