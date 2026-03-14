@@ -39,20 +39,22 @@ const Hero = () => {
       <div className="relative z-10 flex flex-col items-center text-center px-4 pt-24 w-full max-w-4xl mx-auto">
 
         {/* LEMA */}
-        <p className="font-montserrat text-xs font-light tracking-[0.4em] uppercase mb-6 italic" style={{color:"#C8922A", opacity:0.8}}>
+        <p className="font-montserrat text-xs font-light tracking-[0.4em] uppercase mb-6 italic" style={{color:"#C8922A", opacity:0.75}}>
           La isla que llevas dentro
         </p>
 
         {/* Logo */}
         <div className="relative leading-none">
-          <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] text-[#C8922A] leading-none">
-            CUBANE<span className="relative inline-block">O<span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-3 md:h-3 bg-negro rounded-full" /></span>
-          </h1>
-          <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] text-[#7A3B0A] leading-none absolute inset-0 opacity-[0.35] pointer-events-none select-none">
+          {/* Sombra base */}
+          <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] leading-none absolute inset-0 translate-x-[3px] translate-y-[3px] pointer-events-none select-none" style={{color:"#3A1804", opacity:0.8}}>
             CUBANE<span className="relative inline-block">O</span>
           </h1>
+          {/* Cuerpo con gradiente 3 tonos */}
+          <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] leading-none relative" style={{background:"linear-gradient(180deg, #F5D878 0%, #C8922A 35%, #A06818 70%, #6A3E08 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text"}}>
+            CUBANE<span className="relative inline-block">O<span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-3 md:h-3 rounded-full" style={{background:"#3A1804"}} /></span>
+          </h1>
         </div>
-        <p className="font-montserrat font-extralight text-sm md:text-base tracking-[0.4em] uppercase mt-3" style={{color:"#C8922A", opacity:0.85}}>
+        <p className="font-montserrat font-extralight text-sm md:text-base tracking-[0.4em] uppercase mt-3" style={{color:"#C8922A", opacity:0.80}}>
           Portal Inmobiliario
         </p>
 
@@ -197,6 +199,7 @@ const Hero = () => {
 };
 
 export default Hero;
+
 
 
 
