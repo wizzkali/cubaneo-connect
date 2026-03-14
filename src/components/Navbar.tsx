@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -54,12 +55,7 @@ const Navbar = () => {
 
         {/* CTA Button desktop */}
         <div className="hidden lg:block">
-          <a
-            href="#contacto"
-            className="font-montserrat font-semibold text-xs uppercase tracking-wider px-5 py-2 border border-ambar text-ambar hover:bg-ambar hover:text-negro transition-all duration-300"
-          >
-            Publicar Propiedad
-          </a>
+          <Link to="/publicar" className="font-montserrat font-semibold text-xs uppercase tracking-wider px-5 py-2 border border-ambar text-ambar hover:bg-ambar hover:text-negro transition-all duration-300">Publicar Propiedad</Link>
         </div>
 
         {/* Mobile toggle */}
@@ -85,13 +81,7 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <a
-            href="#contacto"
-            className="block mt-4 text-center font-montserrat font-semibold text-xs uppercase tracking-wider px-5 py-3 border border-ambar text-ambar hover:bg-ambar hover:text-negro transition-all duration-300"
-            onClick={() => setMobileOpen(false)}
-          >
-            Publicar Propiedad
-          </a>
+          <Link to="/publicar" className="block mt-4 text-center font-montserrat font-semibold text-xs uppercase tracking-wider px-5 py-3 border border-ambar text-ambar hover:bg-ambar hover:text-negro transition-all duration-300" onClick={() => setMobileOpen(false)}>Publicar Propiedad</Link>
         </div>
       )}
     </nav>
@@ -99,6 +89,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 
