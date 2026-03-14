@@ -22,12 +22,8 @@ const Footer = () => {
         {/* Top row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
           {/* Logo */}
-          <div className="text-center md:text-left">
-            <img
-              src="/favicon.png"
-              alt="Cubaneo — La isla que llevas dentro"
-              className="h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
-            />
+          <div className="text-center md:text-left w-40">
+            {/* ESPACIO RESERVADO */}
           </div>
 
           {/* Nav */}
@@ -68,4 +64,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
 
