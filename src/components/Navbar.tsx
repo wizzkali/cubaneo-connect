@@ -34,7 +34,7 @@ const Navbar = () => {
             CUBANE
             <span className="relative">
               O
-              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-negro rounded-full transition-colors duration-300" />
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-negro rounded-full" />
             </span>
           </span>
           <span className="font-montserrat text-[8px] font-extralight tracking-[0.4em] text-ambar/60 uppercase mt-0.5">
@@ -103,4 +103,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
