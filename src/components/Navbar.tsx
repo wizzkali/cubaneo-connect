@@ -30,14 +30,14 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo */}
         <a href="#" className="flex flex-col group">
-          <span className="font-cinzel text-lg font-black tracking-[0.12em] text-ambar leading-none group-hover:text-ambar/70 transition-colors duration-300">
+          <span className="font-cinzel text-lg font-black tracking-[0.12em] text-[#C8922A] leading-none group-hover:text-[#C8922A]/70 transition-colors duration-300">
             CUBANE
             <span className="relative">
               O
               <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-negro rounded-full" />
             </span>
           </span>
-          <span className="font-montserrat text-[8px] font-extralight tracking-[0.4em] text-ambar/60 uppercase mt-0.5">
+          <span className="font-montserrat text-[8px] font-extralight tracking-[0.4em] text-[#C8922A]/55 uppercase mt-0.5">
             Portal Inmobiliario
           </span>
         </a>
@@ -103,5 +103,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
