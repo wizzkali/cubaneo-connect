@@ -39,15 +39,20 @@ const Hero = () => {
       <div className="relative z-10 flex flex-col items-center text-center px-4 pt-24 w-full max-w-4xl mx-auto">
 
         {/* LEMA */}
-        <p className="font-montserrat text-xs font-light tracking-[0.4em] text-ambar/75 uppercase mb-6 italic">
+        <p className="font-montserrat text-xs font-light tracking-[0.4em] text-[#C8922A]/65 uppercase mb-6 italic">
           La isla que llevas dentro
         </p>
 
         {/* Logo */}
-        <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] text-ambar leading-none drop-shadow-[0_2px_20px_rgba(218,165,32,0.15)]">
-          CUBANE<span className="relative inline-block">O<span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-3 md:h-3 bg-negro rounded-full" /></span>
-        </h1>
-        <p className="font-montserrat font-extralight text-sm md:text-base tracking-[0.4em] text-ambar/85 uppercase mt-3">
+        <div className="relative leading-none">
+          <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] text-[#C8922A] leading-none">
+            CUBANE<span className="relative inline-block">O<span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-3 md:h-3 bg-negro rounded-full" /></span>
+          </h1>
+          <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] text-[#7A3B0A] leading-none absolute inset-0 opacity-[0.35] pointer-events-none select-none">
+            CUBANE<span className="relative inline-block">O</span>
+          </h1>
+        </div>
+        <p className="font-montserrat font-extralight text-sm md:text-base tracking-[0.4em] text-[#C8922A]/80 uppercase mt-3">
           Portal Inmobiliario
         </p>
 
@@ -192,4 +197,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
 
