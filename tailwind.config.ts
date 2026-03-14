@@ -49,7 +49,7 @@ export default {
         },
         verde: "#2F4F4F",
         tabaco: "#8B4513",
-        ambar: "#DAA520",
+        ambar: "#B8860B",
         crema: "#F5F0E8",
         negro: "#1A1208",
         sidebar: {
@@ -95,3 +95,4 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
