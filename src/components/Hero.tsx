@@ -1,80 +1,191 @@
+import { useState } from "react";
+import { SlidersHorizontal, X } from "lucide-react";
 import heroBg from "@/assets/hero-bg.png";
 
-const kpis = [
-  { icon: "🔍", label: "Buscador Inteligente" },
-  { icon: "✓", label: "Sello Verificación TUP" },
-  { icon: "◆", label: "Filtro de Época" },
-  { icon: "☎", label: "Contacto Directo" },
+const tabs = ["Comprar", "Invertir"];
+const tiposPropiedad = ["Mansión Colonial", "Apartamento", "Villa", "Penthouse", "Casa", "Local comercial"];
+const ubicaciones = ["Miramar", "Vedado", "Centro Habana", "Varadero", "Santiago de Cuba", "Trinidad"];
+const precios = [
+  { label: "Hasta $100K", value: "0-100" },
+  { label: "$100K – $300K", value: "100-300" },
+  { label: "$300K – $600K", value: "300-600" },
+  { label: "$600K – $1M", value: "600-1000" },
+  { label: "$1M+", value: "1000+" },
 ];
+const habitaciones = ["1+", "2+", "3+", "4+", "5+"];
+const epocas = ["1850–1900", "1900–1930", "1930–1959", "1960–1990", "Post-1990"];
 
 const Hero = () => {
+  const [activeTab, setActiveTab] = useState("Comprar");
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
+    tipo: "", precio: "", ubicacion: "",
+    habitaciones: "", epoca: "", superficieMin: "", superficieMax: "",
+  });
+
+  const activeFiltersCount = Object.values(filters).filter(Boolean).length;
+  const clearFilters = () => setFilters({ tipo: "", precio: "", ubicacion: "", habitaciones: "", epoca: "", superficieMin: "", superficieMax: "" });
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0">
-        <img
-          src={heroBg}
-          alt="Patio colonial cubano con palmeras tropicales"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,18,8,0.75)] via-[rgba(10,18,8,0.60)] to-[rgba(5,10,4,0.55)]" />
+        <img src={heroBg} alt="Patio colonial cubano" className="w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,18,8,0.82)] via-[rgba(10,18,8,0.68)] to-[rgba(5,10,4,0.80)]" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-4 pt-24">
-        {/* Logo */}
-        <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] text-crema text-shadow-hero leading-none">
+      <div className="absolute top-24 left-8 w-16 h-16 border-t border-l border-ambar/30 hidden md:block" />
+      <div className="absolute top-24 right-8 w-16 h-16 border-t border-r border-ambar/30 hidden md:block" />
+
+      <div className="relative z-10 flex flex-col items-center text-center px-4 pt-24 w-full max-w-4xl mx-auto">
+        <p className="font-montserrat text-[10px] font-light tracking-[0.5em] text-ambar/80 uppercase mb-6">
+          ✦ Diáspora Cubana · Desde 2026 ✦
+        </p>
+
+        <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] text-crema leading-none drop-shadow-[0_2px_20px_rgba(218,165,32,0.15)]">
           CUBANE<span className="relative inline-block">O<span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-3 md:h-3 bg-crema rounded-full" /></span>
         </h1>
         <p className="font-montserrat font-extralight text-sm md:text-base tracking-[0.4em] text-crema/80 uppercase mt-3">
           Portal Inmobiliario
         </p>
 
-        {/* Separator */}
-        <div className="w-24 h-[1px] bg-ambar mt-8 mb-8" />
+        <div className="flex items-center gap-4 mt-8 mb-8">
+          <div className="w-16 h-px bg-ambar/60" />
+          <span className="text-ambar text-xs">◆</span>
+          <div className="w-16 h-px bg-ambar/60" />
+        </div>
 
-        {/* KPIs */}
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
-          {kpis.map((kpi) => (
-            <div
-              key={kpi.label}
-              className="flex items-center gap-2 bg-negro/40 border border-ambar/30 px-4 py-2 backdrop-blur-sm"
-            >
-              <span className="text-ambar text-lg">{kpi.icon}</span>
-              <span className="font-montserrat text-xs font-light tracking-wider text-crema/90 uppercase">
-                {kpi.label}
-              </span>
+        {/* BUSCADOR */}
+        <div className="w-full">
+          {/* Tabs */}
+          <div className="flex items-center gap-0 mb-0">
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`font-montserrat text-xs font-semibold uppercase tracking-widest px-7 py-2.5 transition-all duration-200 ${
+                  activeTab === tab
+                    ? "bg-ambar text-negro"
+                    : "bg-negro/60 text-crema/55 hover:text-crema border border-b-0 border-ambar/20"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+            <span className="ml-3 font-montserrat text-[9px] text-crema/25 tracking-wider hidden sm:block">
+              {activeTab === "Invertir" ? "· Rentabilidad · Oportunidades de mercado" : "· 170+ propiedades verificadas"}
+            </span>
+          </div>
+
+          {/* Campos */}
+          <div className="flex flex-col sm:flex-row items-stretch gap-0 w-full border border-ambar/40 bg-negro/75 backdrop-blur-sm">
+            <select value={filters.tipo} onChange={(e) => setFilters({ ...filters, tipo: e.target.value })}
+              className="flex-1 bg-transparent border-r border-ambar/25 text-crema/80 px-4 py-4 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:bg-negro/40 transition-colors">
+              <option value="" className="bg-negro">Tipo de propiedad</option>
+              {tiposPropiedad.map((t) => <option key={t} value={t} className="bg-negro">{t}</option>)}
+            </select>
+            <select value={filters.precio} onChange={(e) => setFilters({ ...filters, precio: e.target.value })}
+              className="flex-1 bg-transparent border-r border-ambar/25 text-crema/80 px-4 py-4 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:bg-negro/40 transition-colors">
+              <option value="" className="bg-negro">Precio</option>
+              {precios.map((p) => <option key={p.value} value={p.value} className="bg-negro">{p.label}</option>)}
+            </select>
+            <select value={filters.ubicacion} onChange={(e) => setFilters({ ...filters, ubicacion: e.target.value })}
+              className="flex-1 bg-transparent border-r border-ambar/25 text-crema/80 px-4 py-4 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:bg-negro/40 transition-colors">
+              <option value="" className="bg-negro">Ubicación</option>
+              {ubicaciones.map((u) => <option key={u} value={u} className="bg-negro">{u}</option>)}
+            </select>
+            <button className="bg-ambar text-negro font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-4 hover:bg-ambar/90 active:scale-[0.98] transition-all whitespace-nowrap">
+              Buscar
+            </button>
+          </div>
+
+          {/* Toggle filtros avanzados */}
+          <div className="flex items-center justify-between mt-2.5">
+            <button onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center gap-2 font-montserrat text-xs text-crema/45 hover:text-ambar transition-colors">
+              <SlidersHorizontal size={13} />
+              Más filtros
+              {activeFiltersCount > 0 && (
+                <span className="bg-ambar text-negro text-[9px] font-bold px-1.5 py-0.5">{activeFiltersCount}</span>
+              )}
+            </button>
+            {activeFiltersCount > 0 && (
+              <button onClick={clearFilters}
+                className="flex items-center gap-1 font-montserrat text-[10px] text-crema/30 hover:text-crema/60 transition-colors">
+                <X size={11} /> Borrar filtros
+              </button>
+            )}
+          </div>
+
+          {/* Panel filtros avanzados */}
+          {showFilters && (
+            <div className="mt-1.5 bg-negro/88 backdrop-blur-md border border-ambar/25 p-5 text-left">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                <div>
+                  <p className="font-montserrat text-[9px] uppercase tracking-widest text-ambar/60 mb-2.5">Habitaciones</p>
+                  <div className="flex gap-1.5 flex-wrap">
+                    {habitaciones.map((h) => (
+                      <button key={h} onClick={() => setFilters({ ...filters, habitaciones: filters.habitaciones === h ? "" : h })}
+                        className={`font-montserrat text-xs px-3 py-1.5 border transition-all duration-150 ${
+                          filters.habitaciones === h ? "bg-ambar text-negro border-ambar" : "border-ambar/25 text-crema/60 hover:border-ambar/50"
+                        }`}>
+                        {h}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-montserrat text-[9px] uppercase tracking-widest text-ambar/60 mb-2.5">Época de Construcción</p>
+                  <div className="flex gap-1.5 flex-wrap">
+                    {epocas.map((e) => (
+                      <button key={e} onClick={() => setFilters({ ...filters, epoca: filters.epoca === e ? "" : e })}
+                        className={`font-montserrat text-[10px] px-2.5 py-1.5 border transition-all duration-150 ${
+                          filters.epoca === e ? "bg-ambar text-negro border-ambar" : "border-ambar/25 text-crema/60 hover:border-ambar/50"
+                        }`}>
+                        {e}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-montserrat text-[9px] uppercase tracking-widest text-ambar/60 mb-2.5">Superficie (m²)</p>
+                  <div className="flex items-center gap-2">
+                    <input type="number" placeholder="Mín" value={filters.superficieMin}
+                      onChange={(e) => setFilters({ ...filters, superficieMin: e.target.value })}
+                      className="w-20 bg-negro/60 border border-ambar/25 text-crema/80 px-3 py-1.5 font-montserrat text-xs focus:outline-none focus:border-ambar" />
+                    <span className="text-crema/25 text-xs">—</span>
+                    <input type="number" placeholder="Máx" value={filters.superficieMax}
+                      onChange={(e) => setFilters({ ...filters, superficieMax: e.target.value })}
+                      className="w-20 bg-negro/60 border border-ambar/25 text-crema/80 px-3 py-1.5 font-montserrat text-xs focus:outline-none focus:border-ambar" />
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-montserrat text-[9px] uppercase tracking-widest text-ambar/60 mb-2.5">Estado</p>
+                  <div className="flex gap-1.5 flex-wrap">
+                    {["Listo para entrar", "Para reformar", "En proyecto"].map((estado) => (
+                      <button key={estado}
+                        className="font-montserrat text-[10px] px-2.5 py-1.5 border border-ambar/25 text-crema/55 hover:border-ambar/50 transition-all duration-150">
+                        {estado}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
             </div>
-          ))}
-        </div>
+          )}
 
-        {/* Search Bar */}
-        <div className="flex flex-col sm:flex-row items-stretch gap-3 w-full max-w-3xl">
-          <select className="flex-1 bg-negro/60 border border-ambar/40 text-crema/80 px-4 py-3 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:border-ambar">
-            <option>Tipo de propiedad</option>
-            <option>Mansión Colonial</option>
-            <option>Apartamento</option>
-            <option>Villa</option>
-            <option>Penthouse</option>
-          </select>
-          <select className="flex-1 bg-negro/60 border border-ambar/40 text-crema/80 px-4 py-3 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:border-ambar">
-            <option>Precio</option>
-            <option>$50,000 - $200,000</option>
-            <option>$200,000 - $500,000</option>
-            <option>$500,000 - $1,000,000</option>
-            <option>$1,000,000+</option>
-          </select>
-          <select className="flex-1 bg-negro/60 border border-ambar/40 text-crema/80 px-4 py-3 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:border-ambar">
-            <option>Ubicación</option>
-            <option>Miramar</option>
-            <option>Vedado</option>
-            <option>Centro Habana</option>
-            <option>Varadero</option>
-          </select>
-          <button className="bg-ambar text-negro font-montserrat font-semibold text-sm uppercase tracking-wider px-8 py-3 hover:bg-ambar/90 transition-colors">
-            Buscar
-          </button>
+          <p className="font-montserrat text-[10px] text-crema/22 tracking-wider mt-3 text-left">
+            170+ propiedades verificadas · Actualizado diariamente
+          </p>
         </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-px h-8 bg-gradient-to-b from-ambar/60 to-transparent mx-auto" />
       </div>
     </section>
   );
