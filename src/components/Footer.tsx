@@ -23,17 +23,11 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
           {/* Logo */}
           <div className="text-center md:text-left">
-            <span className="font-cinzel font-black text-2xl tracking-[0.12em] text-crema">
-              CUBANE
-              <span className="relative inline-block">
-                O
-                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-crema rounded-full" />
-              </span>
-              .ORG
-            </span>
-            <p className="font-montserrat font-extralight text-[9px] tracking-[0.35em] text-crema/40 uppercase mt-1">
-              Portal Inmobiliario · Cuba
-            </p>
+            <img
+              src="/favicon.png"
+              alt="Cubaneo — La isla que llevas dentro"
+              className="h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
+            />
           </div>
 
           {/* Nav */}
@@ -51,8 +45,8 @@ const Footer = () => {
           </div>
 
           {/* Isotipo */}
-          <div className="w-16 h-16 overflow-hidden rounded-sm hover:opacity-90 transition-opacity duration-300">
-            <img src="/favicon.png" alt="Cubaneo logo" className="w-full h-full object-cover" />
+          <div className="w-14 h-14 rounded-full border-2 border-ambar/60 flex items-center justify-center hover:border-ambar hover:shadow-[0_0_20px_rgba(218,165,32,0.2)] transition-all duration-300">
+            <span className="font-cinzel font-black text-2xl text-ambar">C</span>
           </div>
         </div>
 
