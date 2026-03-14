@@ -51,7 +51,7 @@ const Hero = () => {
           </h1>
           {/* Cuerpo con gradiente 3 tonos */}
           <h1 className="font-cinzel font-black text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] leading-none relative" style={{background:"linear-gradient(180deg, #F5D878 0%, #C8922A 35%, #A06818 70%, #6A3E08 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text"}}>
-            CUBANE<span className="relative inline-block">O<span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-3 md:h-3 rounded-full" style={{background:"#3A1804"}} /></span>
+            CUBANE<span className="relative inline-block">O</span>
           </h1>
         </div>
         <p className="font-montserrat font-extralight text-sm md:text-base tracking-[0.4em] uppercase mt-3" style={{color:"#C8922A", opacity:0.80}}>
@@ -199,6 +199,7 @@ const Hero = () => {
 };
 
 export default Hero;
+
 
 
 
