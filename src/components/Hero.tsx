@@ -4,7 +4,6 @@ import heroBg from "@/assets/hero-bg.png";
 
 const tabs = ["Comprar", "Invertir"];
 const tiposPropiedad = ["Mansión Colonial", "Apartamento", "Villa", "Penthouse", "Casa", "Local comercial"];
-const ubicaciones = ["Miramar", "Vedado", "Centro Habana", "Varadero", "Santiago de Cuba", "Trinidad"];
 const precios = [
   { label: "Desde $5,000", value: "0-5" },
   { label: "$5,000 – $10,000", value: "5-10" },
@@ -40,7 +39,7 @@ const Hero = () => {
       <div className="relative z-10 flex flex-col items-center text-center px-4 pt-24 w-full max-w-4xl mx-auto">
 
         {/* LEMA */}
-        <p className="font-montserrat text-xs font-light tracking-[0.4em] text-crema/75 uppercase mb-6 italic">
+        <p className="font-montserrat text-xs font-light tracking-[0.4em] text-ambar/75 uppercase mb-6 italic">
           La isla que llevas dentro
         </p>
 
@@ -66,33 +65,39 @@ const Hero = () => {
                 className={`font-montserrat text-xs font-semibold uppercase tracking-widest px-7 py-2.5 transition-all duration-200 ${
                   activeTab === tab
                     ? "bg-ambar text-negro"
-                    : "bg-negro/70 text-crema/75 hover:text-crema border border-b-0 border-ambar/30"
+                    : "bg-negro/70 text-ambar/70 hover:text-ambar border border-b-0 border-ambar/30"
                 }`}>
                 {tab}
               </button>
             ))}
-            <span className="ml-3 font-montserrat text-[9px] text-crema/55 tracking-wider hidden sm:block">
+            {/* Tag contextual — ahora en ambar visible */}
+            <span className="ml-3 font-montserrat text-[9px] text-ambar/60 tracking-wider hidden sm:block">
               {activeTab === "Invertir" ? "· Rentabilidad · Oportunidades de mercado" : "· 170+ propiedades verificadas"}
             </span>
           </div>
 
           {/* Campos buscador */}
           <div className="flex flex-col sm:flex-row items-stretch gap-0 w-full border border-ambar/40 bg-negro/80 backdrop-blur-sm">
+            {/* Tipo */}
             <select value={filters.tipo} onChange={(e) => setFilters({ ...filters, tipo: e.target.value })}
-              className="flex-1 bg-transparent border-r border-ambar/25 text-crema/90 px-4 py-4 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:bg-negro/50 transition-colors">
-              <option value="" className="bg-negro">Tipo de propiedad</option>
-              {tiposPropiedad.map((t) => <option key={t} value={t} className="bg-negro">{t}</option>)}
+              className="flex-1 bg-transparent border-r border-ambar/25 text-ambar/80 px-4 py-4 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:bg-negro/50 transition-colors">
+              <option value="" className="bg-negro text-crema">Tipo de propiedad</option>
+              {tiposPropiedad.map((t) => <option key={t} value={t} className="bg-negro text-crema">{t}</option>)}
             </select>
+            {/* Precio */}
             <select value={filters.precio} onChange={(e) => setFilters({ ...filters, precio: e.target.value })}
-              className="flex-1 bg-transparent border-r border-ambar/25 text-crema/90 px-4 py-4 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:bg-negro/50 transition-colors">
-              <option value="" className="bg-negro">Precio</option>
-              {precios.map((p) => <option key={p.value} value={p.value} className="bg-negro">{p.label}</option>)}
+              className="flex-1 bg-transparent border-r border-ambar/25 text-ambar/80 px-4 py-4 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:bg-negro/50 transition-colors">
+              <option value="" className="bg-negro text-crema">Precio</option>
+              {precios.map((p) => <option key={p.value} value={p.value} className="bg-negro text-crema">{p.label}</option>)}
             </select>
-            <select value={filters.ubicacion} onChange={(e) => setFilters({ ...filters, ubicacion: e.target.value })}
-              className="flex-1 bg-transparent border-r border-ambar/25 text-crema/90 px-4 py-4 font-montserrat text-sm font-light appearance-none cursor-pointer focus:outline-none focus:bg-negro/50 transition-colors">
-              <option value="" className="bg-negro">Ubicación</option>
-              {ubicaciones.map((u) => <option key={u} value={u} className="bg-negro">{u}</option>)}
-            </select>
+            {/* Ubicación libre — input text */}
+            <input
+              type="text"
+              placeholder="Ubicación (ciudad, zona, dirección...)"
+              value={filters.ubicacion}
+              onChange={(e) => setFilters({ ...filters, ubicacion: e.target.value })}
+              className="flex-1 bg-transparent border-r border-ambar/25 text-ambar/80 placeholder:text-ambar/40 px-4 py-4 font-montserrat text-sm font-light focus:outline-none focus:bg-negro/50 transition-colors"
+            />
             <button className="bg-ambar text-negro font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-4 hover:bg-ambar/90 active:scale-[0.98] transition-all whitespace-nowrap">
               Buscar
             </button>
@@ -101,7 +106,7 @@ const Hero = () => {
           {/* Toggle filtros */}
           <div className="flex items-center justify-between mt-2.5">
             <button onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center gap-2 font-montserrat text-xs text-crema/65 hover:text-ambar transition-colors">
+              className="flex items-center gap-2 font-montserrat text-xs text-ambar/60 hover:text-ambar transition-colors">
               <SlidersHorizontal size={13} />
               Más filtros
               {activeFiltersCount > 0 && (
@@ -110,12 +115,13 @@ const Hero = () => {
             </button>
             {activeFiltersCount > 0 && (
               <button onClick={clearFilters}
-                className="flex items-center gap-1 font-montserrat text-[10px] text-crema/55 hover:text-crema/80 transition-colors">
+                className="flex items-center gap-1 font-montserrat text-[10px] text-ambar/50 hover:text-ambar transition-colors">
                 <X size={11} /> Borrar filtros
               </button>
             )}
           </div>
 
+          {/* Panel filtros avanzados */}
           {showFilters && (
             <div className="mt-1.5 bg-negro/90 backdrop-blur-md border border-ambar/25 p-5 text-left">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -125,7 +131,7 @@ const Hero = () => {
                     {habitaciones.map((h) => (
                       <button key={h} onClick={() => setFilters({ ...filters, habitaciones: filters.habitaciones === h ? "" : h })}
                         className={`font-montserrat text-xs px-3 py-1.5 border transition-all duration-150 ${
-                          filters.habitaciones === h ? "bg-ambar text-negro border-ambar" : "border-ambar/30 text-crema/75 hover:border-ambar/60"
+                          filters.habitaciones === h ? "bg-ambar text-negro border-ambar" : "border-ambar/30 text-ambar/70 hover:border-ambar"
                         }`}>
                         {h}
                       </button>
@@ -138,7 +144,7 @@ const Hero = () => {
                     {epocas.map((e) => (
                       <button key={e} onClick={() => setFilters({ ...filters, epoca: filters.epoca === e ? "" : e })}
                         className={`font-montserrat text-[10px] px-2.5 py-1.5 border transition-all duration-150 ${
-                          filters.epoca === e ? "bg-ambar text-negro border-ambar" : "border-ambar/30 text-crema/75 hover:border-ambar/60"
+                          filters.epoca === e ? "bg-ambar text-negro border-ambar" : "border-ambar/30 text-ambar/70 hover:border-ambar"
                         }`}>
                         {e}
                       </button>
@@ -150,11 +156,11 @@ const Hero = () => {
                   <div className="flex items-center gap-2">
                     <input type="number" placeholder="Mín" value={filters.superficieMin}
                       onChange={(e) => setFilters({ ...filters, superficieMin: e.target.value })}
-                      className="w-20 bg-negro/60 border border-ambar/30 text-crema/90 px-3 py-1.5 font-montserrat text-xs focus:outline-none focus:border-ambar" />
-                    <span className="text-crema/40 text-xs">—</span>
+                      className="w-20 bg-negro/60 border border-ambar/30 text-ambar/80 placeholder:text-ambar/30 px-3 py-1.5 font-montserrat text-xs focus:outline-none focus:border-ambar" />
+                    <span className="text-ambar/40 text-xs">—</span>
                     <input type="number" placeholder="Máx" value={filters.superficieMax}
                       onChange={(e) => setFilters({ ...filters, superficieMax: e.target.value })}
-                      className="w-20 bg-negro/60 border border-ambar/30 text-crema/90 px-3 py-1.5 font-montserrat text-xs focus:outline-none focus:border-ambar" />
+                      className="w-20 bg-negro/60 border border-ambar/30 text-ambar/80 placeholder:text-ambar/30 px-3 py-1.5 font-montserrat text-xs focus:outline-none focus:border-ambar" />
                   </div>
                 </div>
                 <div>
@@ -162,7 +168,7 @@ const Hero = () => {
                   <div className="flex gap-1.5 flex-wrap">
                     {["Listo para entrar", "Para reformar", "En proyecto"].map((estado) => (
                       <button key={estado}
-                        className="font-montserrat text-[10px] px-2.5 py-1.5 border border-ambar/30 text-crema/75 hover:border-ambar/60 transition-all duration-150">
+                        className="font-montserrat text-[10px] px-2.5 py-1.5 border border-ambar/30 text-ambar/70 hover:border-ambar transition-all duration-150">
                         {estado}
                       </button>
                     ))}
@@ -172,7 +178,7 @@ const Hero = () => {
             </div>
           )}
 
-          <p className="font-montserrat text-[10px] text-crema/45 tracking-wider mt-3 text-left">
+          <p className="font-montserrat text-[10px] text-ambar/45 tracking-wider mt-3 text-left">
             170+ propiedades verificadas · Actualizado diariamente
           </p>
         </div>
