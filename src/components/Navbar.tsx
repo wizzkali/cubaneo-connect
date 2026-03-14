@@ -30,14 +30,10 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo */}
         <a href="#" className="flex flex-col group">
-          <span className="font-cinzel text-lg font-black tracking-[0.12em] text-[#C8922A] leading-none group-hover:text-[#C8922A]/70 transition-colors duration-300">
-            CUBANE
-            <span className="relative">
-              O
-              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-negro rounded-full" />
-            </span>
+          <span className="font-cinzel text-lg font-black tracking-[0.12em] leading-none" style={{background:"linear-gradient(180deg, #F5D878 0%, #C8922A 35%, #A06818 70%, #6A3E08 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text"}}>
+            CUBANEO
           </span>
-          <span className="font-montserrat text-[8px] font-extralight tracking-[0.4em] text-[#C8922A]/55 uppercase mt-0.5">
+          <span className="font-montserrat text-[8px] font-extralight tracking-[0.4em] uppercase mt-0.5" style={{color:"#A06818", opacity:0.75}}">
             Portal Inmobiliario
           </span>
         </a>
@@ -103,6 +99,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 
