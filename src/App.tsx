@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import PropertyDetail from "./pages/PropertyDetail";
 import NotFound from "./pages/NotFound";
+import PublicarPropiedad from "./pages/PublicarPropiedad";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/propiedad/:slug" element={<PropertyDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/publicar" element={<PublicarPropiedad />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
@@ -27,3 +29,4 @@ const App = () => (
 );
 
 export default App;
+
